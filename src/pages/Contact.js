@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-
+import emailjs from '@emailjs/browser';
 export default function Contact() {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
@@ -7,7 +7,20 @@ export default function Contact() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log('Form submitted:', { name, email, message });
+    const templateParams = {
+      name,
+      email,
+      message,
+    };
+    emailjs.send(process.env.REACT_APP_EMAILJS_SERVICE_ID, process.env.REACT_APP_EMAILJS_TEMPLATE_ID, templateParams, process.env.REACT_APP_EMAILJS_PUBLIC_KEY)
+      .then((response) => {
+        console.log('SUCCESS!', response.status, response.text);
+      })
+      .catch((err) => {
+        console.error('FAILED...', err);
+      });
+
+    // Clear form fields
     setName('');
     setEmail('');
     setMessage('');
