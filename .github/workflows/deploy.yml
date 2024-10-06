@@ -17,10 +17,12 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: '14'  # specify the Node.js version
-
+      - name: Login details
+        run:  git config user.email "alvanzhuang625@gmail.com"
+              git config user.name "AlvanZ"
       - name: Install dependencies
         run: npm install
-
+    
       - name: Build the project
         run: npm run build
 
