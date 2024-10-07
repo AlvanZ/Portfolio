@@ -29,7 +29,10 @@ jobs:
       - name: Build the project
         run: |
           npm run build --if-present
-          
+        env:
+          REACT_APP_EMAILJS_SERVICE_ID : ${{ secrets.REACT_APP_EMAILJS_SERVICE_ID }}
+          REACT_APP_EMAILJS_TEMPLATE_ID : ${{ secrets.REACT_APP_EMAILJS_TEMPLATE_ID }}
+          REACT_APP_EMAILJS_PUBLIC_KEY : ${{ secrets.REACT_APP_EMAILJS_PUBLIC_KEY }}
       - name: Deploy with gh-pages
         run: |
             git remote set-url origin https://git:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git
