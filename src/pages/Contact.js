@@ -4,26 +4,41 @@ export default function Contact() {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
-
+  const [isSubmitting, setIsSubmitting] = useState(false); // Loading state
+  const [statusMessage, setStatusMessage] = useState(''); // To show success or error message
   const handleSubmit = (e) => {
     e.preventDefault();
+    setIsSubmitting(true); // Set submitting state to true
+    setStatusMessage(''); // Clear previous status message
+
     const templateParams = {
       name,
       email,
       message,
     };
-    emailjs.send(process.env.REACT_APP_EMAILJS_SERVICE_ID, process.env.REACT_APP_EMAILJS_TEMPLATE_ID, templateParams, process.env.REACT_APP_EMAILJS_PUBLIC_KEY)
-      .then((response) => {
-        console.log('SUCCESS!', response.status, response.text);
-      })
-      .catch((err) => {
-        console.error('FAILED...', err);
-      });
 
-    // Clear form fields
-    setName('');
-    setEmail('');
-    setMessage('');
+    emailjs.send(
+      process.env.REACT_APP_EMAILJS_SERVICE_ID,
+      process.env.REACT_APP_EMAILJS_TEMPLATE_ID,
+      templateParams,
+      process.env.REACT_APP_EMAILJS_PUBLIC_KEY
+    )
+    .then((response) => {
+      console.log('SUCCESS!', response.status, response.text);
+      setStatusMessage('Your message has been sent successfully!');
+      // Clear form fields only after a successful submission
+      setName('');
+      setEmail('');
+      setMessage('');
+    })
+    .catch((err) => {
+      console.log(err);
+      setStatusMessage('Something went wrong. Please try again later.');
+      console.log(err.response);
+    })
+    .finally(() => {
+      setIsSubmitting(false); // Reset loading state
+    });
   };
 
   return (
@@ -32,6 +47,14 @@ export default function Contact() {
       <p className="text-lg text-slate-600">
         I'm always open to new opportunities and collaborations. Feel free to reach out!
       </p>
+      
+      {/* Status Message */}
+      {statusMessage && (
+        <div className="text-center py-3 px-4 text-sm rounded-md bg-teal-100 text-teal-800">
+          {statusMessage}
+        </div>
+      )}
+
       <form onSubmit={handleSubmit} className="bg-white shadow-md rounded-lg p-6 space-y-4">
         <div>
           <label htmlFor="name" className="block text-sm font-medium text-slate-700">Name</label>
@@ -68,9 +91,10 @@ export default function Contact() {
         </div>
         <button
           type="submit"
-          className="w-full bg-teal-600 text-white py-2 px-4 rounded-md hover:bg-teal-700 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-offset-2 transition-colors"
+          disabled={isSubmitting} // Disable button while submitting
+          className="w-full bg-teal-600 text-white py-2 px-4 rounded-md hover:bg-teal-700 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-offset-2 transition-colors disabled:bg-teal-300"
         >
-          Send Message
+          {isSubmitting ? 'Sending...' : 'Send Message'}
         </button>
       </form>
     </div>
