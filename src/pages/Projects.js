@@ -1,6 +1,17 @@
 import React from 'react';
 export default function Projects() {
   const projects = [
+        {
+      title: "Quiz Slayer",
+      description: "Developed a 2D educational quiz game using C# and Unity, featuring a serverless backend on AWS Lambda, frontend hosted on an EC2 instance, and game assets delivered via S3. Integrated OpenAI API to dynamically generate quiz content and interpret user responses.",
+      details: [
+        "Designed and implemented core gameplay mechanics, visuals, and Unity-to-web integration.",
+        "Built backend using AWS Lambda with efficient API calls and connected frontend/backend to update the database in real time.",
+        "Utilized OpenAI API to generate quiz questions and process natural language inputs from users."
+      ],
+      technologies: ["C#", "Unity", "React", "AWS Lambda", "AWS S3", "AWS EC2", "OpenAI API"],
+      url: "https://github.com/YuStudy-Inc/QuizSlayer"
+    },
     {
       title: "Modifier Mayhem",
       description: "A 3D first-person survival shooter game developed using C# and Unity.",

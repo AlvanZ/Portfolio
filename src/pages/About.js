@@ -7,7 +7,7 @@ export default function About() {
         <div>
           <h3 className="text-2xl font-semibold text-slate-700 mb-2">My Journey</h3>
           <p className="text-slate-600">
-            As a Computer Science student at California State Polytechnic University, Pomona, 
+            As a Computer Science graduate at California State Polytechnic University, Pomona, 
             I've developed a passion for solving complex problems through technology. My academic 
             journey has been marked by consistent excellence, maintaining a 3.99 GPA and earning 
             spots on the Dean's List and President's Honor List multiple times.
@@ -16,10 +16,7 @@ export default function About() {
         <div>
           <h3 className="text-2xl font-semibold text-slate-700 mb-2">Research and Experience</h3>
           <p className="text-slate-600">
-            Currently, I'm working as a Research Assistant on the CPP Mobility Scooter Research Project, 
-            where I'm developing machine learning models and working on a mobile application. I've also 
-            gained valuable experience as a STEM Instructor Intern and as a Lab Assistant in the CPP VR lab, 
-            which has honed my skills in teaching, troubleshooting, and working with cutting-edge technologies.
+        Currently, I'm working as a .NET Developer Intern at AAA Auto Club, where I help modernize and integrate internal tools to streamline sales processes and align them with industry standards. I actively contribute to peer testing and code reviews, collaborating with the team to ensure code quality and deliver high-performing software solutions.
           </p>
         </div>
         <div>
